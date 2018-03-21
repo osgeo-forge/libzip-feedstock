@@ -21,6 +21,8 @@ source:
     - 0003-Use-cmake-E-tar-to-extract-test-data.patch  # [win]
 
 build:
+  # Skip py35 since py36 is built and uses same vc14
+  skip: True  # [win and py35]
   number: 2
   features:
     - vc9   # [win and py27]
