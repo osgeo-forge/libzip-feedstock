@@ -1,6 +1,6 @@
 {% set name = "libzip" %}
-{% set version = "1.4.0" %}
-{% set sha256 = "759a89690e155ca52247638b9f97e16e48fbb6077abb7ce2d921dd5b81259940" %}
+{% set version = "1.5.0" %}
+{% set sha256 = "fd320f57a7de2f729aa6948a9487530e57e0ca8e4ef6b4e418b525a635ab689c" %}
 
 package:
   name: {{ name|lower }}
@@ -10,20 +10,11 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://libzip.org/download/libzip-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # This disables the "malloc" test which also doesn't compile on Windows.
-    # This patch is taken from a commit post 1.4.0 release
-    - 0001-Unhook-malloc.c-from-build.patch  # [win]
-    # This disables a test that the library developers had disabled at one point
-    # https://github.com/nih-at/libzip/commit/57b97e9f069f8f9164ec6877bc00edb00cdb85b3
-    # Disabling for our build for now, pending fix or removal in library
-    - 0002-disable-nonrandomopentest-from-build.patch  # [win]
-    - 0003-Use-cmake-E-tar-to-extract-test-data.patch  # [win]
 
 build:
   # Skip py35 since py36 is built and uses same vc14
   skip: True  # [win and py35]
-  number: 2
+  number: 0
   features:
     - vc9   # [win and py27]
     - vc10  # [win and py34]
