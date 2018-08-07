@@ -13,33 +13,20 @@ source:
 
 build:
   # Skip py35 since py36 is built and uses same vc14
-  skip: True  # [win and py35]
-  number: 0
-  features:
-    - vc9   # [win and py27]
-    - vc10  # [win and py34]
-    - vc14  # [win and py35]
-    - vc14  # [win and py36]
+  number: 1
 
 requirements:
   build:
     - cmake
-    - zlib 1.2.11
-    - bzip2 1.0.*
-    - python  # [win]
-    - vc 9   # [win and py27]
-    - vc 10  # [win and py34]
-    - vc 14  # [win and py35]
-    - vc 14  # [win and py36]
-    # perl is needed to run the package tests
     - perl 5.20.3.1  # avoid making a matrix of perl builds
+    - {{ compiler('c') }}
+  host:
+    - zlib
+    - bzip2
+    # perl is needed to run the package tests
   run:
-    - zlib 1.2.11
-    - bzip2 1.0.*
-    - vc 9   # [win and py27]
-    - vc 10  # [win and py34]
-    - vc 14  # [win and py35]
-    - vc 14  # [win and py36]
+    - zlib
+    - bzip2
 
 test:
   commands:
